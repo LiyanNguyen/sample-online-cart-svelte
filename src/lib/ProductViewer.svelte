@@ -1,6 +1,6 @@
 <script>
 	import closeIcon from "../assets/close-icon.png"
-  import { blackLayerisOpen, cartItems, currentProductImg, currentProductName, currentProductPrice, productViewerIsOpen } from "./sharedState";
+  import { blackLayerisOpen, cartItems, currentProductImg, currentProductName, currentProductPrice, notificationIsOpen, productViewerIsOpen } from "./sharedState";
 
 	let quantity = 0
 	let showError = false
@@ -36,6 +36,9 @@
 			$cartItems = $cartItems
 			// in svelte, methods that mutate arrays do not trigger reactivity
 			// so we have to redeclare them
+			$notificationIsOpen = true
+
+			window.setTimeout(() =>{$notificationIsOpen = false}, 2000)
 		}
 	}
 </script>

@@ -3,7 +3,7 @@
   import ProductCard from "./lib/ProductCard.svelte";
   import ProductViewer from "./lib/ProductViewer.svelte";
   import CartItems from "./lib/CartItems.svelte";
-  
+  import Notification from "./lib/Notification.svelte";  
 
   // images for product - static in this sample project
   import blackShoes from "./assets/black-shoes.png"
@@ -36,7 +36,7 @@
   }
 </script>
 
-
+<Notification/>
 {#if $cartItemIsOpen}
   <CartItems/>
 {/if}

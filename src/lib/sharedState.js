@@ -6,6 +6,7 @@ export const cartItems = writable([])
 export let blackLayerisOpen = writable(false)
 export let productViewerIsOpen = writable(false)
 export let cartItemIsOpen = writable(false)
+export let notificationIsOpen = writable(false)
 
 export let currentProductName = writable("")
 export let currentProductPrice = writable(0)
