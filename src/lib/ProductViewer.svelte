@@ -21,7 +21,7 @@
 	}
 
 	function addToCart() {
-		if(quantity === 0) {
+		if(quantity <= 0) {
 			showError = true
 		}
 		else {
