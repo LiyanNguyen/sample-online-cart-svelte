@@ -1,11 +1,23 @@
 <script>
-  import { blackLayerisOpen, cartItemIsOpen, cartItems } from "./sharedState";
+  import { each } from "svelte/internal";
+	import closeIcon from "../assets/close-icon.png"
+  import { blackLayerisOpen, cartItemIsOpen, cartItems, currentProductImg } from "./sharedState";
 
 	function closeCartItem () {
     $blackLayerisOpen = false
     $cartItemIsOpen = false
   }
 
+	let grandTotal = 0
+
+	$:$cartItems.forEach(item => {
+		grandTotal += item.Price * item.Quantity
+	})
+
+	function checkOut () {
+		closeCartItem()
+		alert("This is just a sample online cart\nNo purchase will actually be made")
+	}
 </script>
 
 <div class="cartItem">
@@ -13,13 +25,26 @@
 		<h2>Your cart is empty</h2>
 		<p>Purchase items and add them to cart</p>
 		<button on:click={closeCartItem}>OK</button>
+	{:else}
+		<img src={closeIcon} alt="" class="closeIcon" on:click={closeCartItem} on:keydown={closeCartItem}>
+		<h2>Your Cart</h2>
+		{#each $cartItems as item}
+			<div class="currentCart">
+				<img src={item.ImgSrc} alt="">
+				<p>{item.Name} - ${item.Price} x {item.Quantity} = ${item.Price * item.Quantity}</p>
+			</div>
+		{/each}
+		<div class="line"></div>
+		<p class="total">Total: <span>${grandTotal}</span></p>
+		<div class="line"></div>
+		<button on:click={checkOut}>Check Out</button>
 	{/if}
 </div>
 
 <style>
 	.cartItem {
 		width: 20rem;
-		height: 20rem;
+		height: max-content;
 		background-color: white;
 		position: fixed;
 		margin-top: auto;
@@ -40,6 +65,15 @@
 		gap: 1rem;
 	}
 
+	.closeIcon {
+		position: absolute;
+		top: .5rem;
+		right: .5rem;
+		display: block;
+		width: 1.5rem;
+		cursor: pointer;
+	}
+
 	button {
 		padding: .5rem 1rem;
 		border-radius: .25rem;
@@ -54,5 +88,31 @@
 
 	button:hover {
 		background: var(--hover);
+	}
+
+	.currentCart {
+		display: flex;
+		align-items: center;
+		width: 100%;
+		gap: 1rem;
+	}
+
+	.currentCart img {
+		display: block;
+		width: 3rem;
+		border-radius: .25rem;
+	}
+
+	.line {
+		height: 0.1rem;
+		width: 100%;
+		background-color: var(--mainColor);
+	}
+
+	.total {
+		display: flex;
+		justify-content: space-between;
+		width: 100%;
+		font-weight: 700;
 	}
 </style>

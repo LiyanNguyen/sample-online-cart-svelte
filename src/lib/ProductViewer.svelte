@@ -1,7 +1,9 @@
 <script>
 	import closeIcon from "../assets/close-icon.png"
-  import { blackLayerisOpen, currentProductImg, currentProductName, currentProductPrice, productViewerIsOpen } from "./sharedState";
+  import { blackLayerisOpen, cartItems, currentProductImg, currentProductName, currentProductPrice, productViewerIsOpen } from "./sharedState";
+
 	let quantity = 0
+	let showError = false
 
 	function add () {
 		quantity++
@@ -17,6 +19,25 @@
 		$blackLayerisOpen = false
 		$productViewerIsOpen = false
 	}
+
+	function addToCart() {
+		if(quantity === 0) {
+			showError = true
+		}
+		else {
+			$cartItems.push(
+				{
+					Name: $currentProductName,
+					Price:$currentProductPrice,
+					Quantity: quantity,
+					ImgSrc: $currentProductImg
+				})
+			closeProductViewer()
+			$cartItems = $cartItems
+			// in svelte, methods that mutate arrays do not trigger reactivity
+			// so we have to redeclare them
+		}
+	}
 </script>
 
 <div class="productViewer">
@@ -31,7 +52,8 @@
 		<input type="number" placeholder="0" bind:value={quantity}>
 		<button on:click={add}>+</button>
 	</div>
-	<button>Add To Cart</button>
+	<button on:click={addToCart}>Add To Cart</button>
+	<p class="error" class:active={showError}>cannot be zero</p>
 </div>
 
 <style>
@@ -116,5 +138,14 @@
 
 	input[type=number] {
     -moz-appearance:textfield;
+	}
+
+	.error {
+		color: red;
+		display: none;
+	}
+
+	.error.active {
+		display: block;
 	}
 </style>

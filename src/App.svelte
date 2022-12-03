@@ -34,9 +34,7 @@
     $cartItemIsOpen = true
     $blackLayerisOpen = true
   }
-
 </script>
-
 
 
 {#if $cartItemIsOpen}
@@ -75,7 +73,7 @@
   nav {
     display: flex;
     height: 4.5rem;
-    box-shadow: 0 0 1rem .1rem rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 1rem .1rem rgba(0, 0, 0, 0.2);
     align-items: center;
     padding-inline: 2rem;
     position: fixed;

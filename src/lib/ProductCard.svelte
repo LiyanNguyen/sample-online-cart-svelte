@@ -6,13 +6,6 @@
 	import { blackLayerisOpen, cartItems, currentProductImg, currentProductName, currentProductPrice, productViewerIsOpen } from "./sharedState"
 
 	function openProductViewer () {
-		// $cartItems.push({ImgSrc, Name, Price})
-		// $cartItems = $cartItems
-		// // in svelte, methods that mutate arrays do not trigger reactivity
-		// // so we have to redeclare them
-		
-		// console.log($cartItems)
-
 		$blackLayerisOpen = true
 		$productViewerIsOpen = true
 		$currentProductName = Name
