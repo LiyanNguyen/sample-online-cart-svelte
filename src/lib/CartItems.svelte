@@ -28,10 +28,11 @@
 	{:else}
 		<img src={closeIcon} alt="" class="closeIcon" on:click={closeCartItem} on:keydown={closeCartItem}>
 		<h2>Your Cart</h2>
-		{#each $cartItems as item}
+		{#each $cartItems as item, idx}
 			<div class="currentCart">
 				<img src={item.ImgSrc} alt="">
-				<p>{item.Name} - ${item.Price} x {item.Quantity} = ${item.Price * item.Quantity}</p>
+				<p>{item.Name} - ${item.Price} x {item.Quantity}<br>${item.Price * item.Quantity}</p>
+				<button class="removeButton" on:click={() => {$cartItems.splice(idx,1); $cartItems =$cartItems; grandTotal=0}}>x</button>
 			</div>
 		{/each}
 		<div class="line"></div>
@@ -90,11 +91,19 @@
 		background: var(--hover);
 	}
 
+	.removeButton {
+		padding: .25rem .5rem;
+		background-color: #B21807;
+		margin-left: auto;
+		border-radius: .5rem;
+	}
+
+
 	.currentCart {
 		display: flex;
 		align-items: center;
-		width: 100%;
 		gap: 1rem;
+		width: 100%;
 	}
 
 	.currentCart img {
