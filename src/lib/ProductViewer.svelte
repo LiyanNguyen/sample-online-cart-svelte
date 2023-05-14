@@ -36,8 +36,9 @@
 			$cartItems = $cartItems
 			// in svelte, methods that mutate arrays do not trigger reactivity
 			// so we have to redeclare them
-			$notificationIsOpen = true
 
+			//play the notification animation for 2 seconds then remove it
+			$notificationIsOpen = true
 			window.setTimeout(() =>{$notificationIsOpen = false}, 2000)
 		}
 	}
